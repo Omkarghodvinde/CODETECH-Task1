@@ -1,0 +1,31 @@
+import re
+
+def check_password_strength(password):
+    # Minimum length requirement
+    min_length = 8
+    
+   
+    if len(password) < min_length:
+        return "Password is too short. It should be at least {} characters long.".format(min_length)
+    
+  
+    if not re.search("[a-z]", password):
+        return "Password should include at least one lowercase letter."
+    if not re.search("[A-Z]", password):
+        return "Password should include at least one uppercase letter."
+    if not re.search("[0-9]", password):
+        return "Password should include at least one digit."
+    if not re.search("[@#$%^&+=]", password):
+        return "Password should include at least one special character."
+    
+     
+    common_patterns = ["123456", "password", "abcdef", "qwerty", "letmein"]
+    if any(pattern in password.lower() for pattern in common_patterns):
+        return "Password is too common. Try to make it more unique."
+    
+    return "Password is strong."
+
+
+password ="jkRCB123*&!"
+result = check_password_strength(password)
+print(result)
